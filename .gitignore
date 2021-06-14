@@ -1,3 +1,25 @@
+**/*.o
+**/*.so
+**/*.out
+**/env/**
+**/__pycache__/**
+crc32/pkg/**
+**/.vscode/**
+**/*.tar.gz
+**/*.whl
+**/build/*
+**/*.egg-info/**
+crc32/pkg/crc32/**
+
+
+
+
+
+
+
+
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
