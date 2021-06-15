@@ -29,62 +29,62 @@ int process(char* code, int* buffer, int* buffer_index, void (*output_func)(int 
     int code_index = 0;
     int bracket_depth = 0;
 
-    while(*(code + code_index) != '\0'){
-        switch (*(code + code_index))
-        {
-        case '>':
-            (*buffer_index)++;
-            code_index++;
-            break;
-        case '<':
-            (*buffer_index)--;
-            code_index++;
-            break;
-        case '+':
-            (*(buffer + *buffer_index))++;
-            code_index++;
-            break;
-        case '-':
-            (*(buffer + *buffer_index))--;
-            code_index++;
-            break;
-        case '[':
-        // If current pointer occupant is not True, move to end of block
-        // and then next. Otherwise, continue.
-            if (!(*(buffer + *buffer_index))){
+    while (*(code + code_index) != '\0'){
+        switch (*(code + code_index)){
+            case '>':
+                (*buffer_index)++;
+                break;
+            case '<':
+                (*buffer_index)--;
+                break;
+            case '+':
+                (*(buffer + *buffer_index))++;
+                break;
+            case '-':
+                (*(buffer + *buffer_index))--;
+                break;
+            case '.':
+                output_func(*(buffer + *buffer_index));
+                break;
+            case ',':
+                *(buffer + *buffer_index) = input_func();
+                break;
+            case '[':
+                // If current pointer is False,
+                // move code buffer to end of while block.
+                // OTHERWISE, continue.
+                if(!(*(buffer + *buffer_index))){
+                    bracket_depth++;
+                    while (bracket_depth != 0){
+                        code_index++;
+                        if ((*(code + code_index)) == '['){
+                            bracket_depth++;
+                        } else if((*(code + code_index)) == ']'){
+                            bracket_depth--;
+                        }
+                    }
+                }
+                break;
+            case ']':
+                // Move to beginning of the current block.
                 bracket_depth--;
                 while (bracket_depth != 0){
-                    code_index++;
-                    if (*(code + code_index) == '['){
+                    code_index--;
+                    if ((*(code + code_index)) == '['){
                         bracket_depth++;
-                    } else if (*(code + code_index) == ']'){
+                    } else if((*(code + code_index)) == ']'){
                         bracket_depth--;
                     }
                 }
-            }
-            code_index++;
-            break;
-        case ']':
-        // Move pointer to begining of the current block.
-            bracket_depth++;
-            while (bracket_depth != 0){
                 code_index--;
-                if (*(code + code_index) == ']'){
-                    bracket_depth++;
-                } else if (*(code + code_index) == '['){
-                    bracket_depth--;
-                }
-            }
-            break;
-        case '.':
-            output_func(*(buffer + *buffer_index));
-            break;
-        case ',':
-            *(buffer + *buffer_index) = input_func();
-            break;
-        default:
-            break;
+                break;
+
+
+            default:
+                break;
         }
+
+        code_index++;
     }
     return 0;
 }
