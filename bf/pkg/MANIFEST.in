@@ -1,2 +1,2 @@
 include pyproject.toml
-recursive-include bf *.so
+recursive-include bfi *.so

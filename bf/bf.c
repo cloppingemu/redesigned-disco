@@ -1,8 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-#define IO_BUF_SIZE 1024
-
 void clean(char* code, char* cleaned){
     int input = 0;
     int output = 0;
@@ -87,18 +82,4 @@ int process(char* code, int* buffer, int* buffer_index, void (*output_func)(int 
         code_index++;
     }
     return 0;
-}
-
-void test_input(int (*input_func)(void)){
-    int input =  input_func();
-    if (input == IO_BUF_SIZE){
-        puts("PASS");
-    } else{
-        puts("FAIL");
-    }
-}
-
-void test_output(void (*output_func)(int s)){
-    int num = IO_BUF_SIZE;
-    output_func(num);
 }

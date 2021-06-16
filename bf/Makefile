@@ -39,7 +39,7 @@ clean:
 	@echo "\nCleaning\n"
 	rm -Rf ../env
 	rm -f *.o *.so *.out *.a interface/*.o interface/*.out
-	rm -f MANIFEST pkg/bf/* pkg/README.md pkg/bf*.tar.gz pkg/bf*.whl
+	rm -f MANIFEST pkg/bfi/* pkg/README.md pkg/bfi*.tar.gz pkg/bfi*.whl
 	rm -Rf build dist pkg/dist pkg/build pkg/*.egg-info
 
 env:
@@ -47,12 +47,12 @@ env:
 	virtualenv ../env
 	../env/bin/python -m pip install -r ../requirements.txt
 
-build: env
+build: env lib
 	@echo "\nSetting up Python Wheel"
-	cp __init__.py pkg/bf/__init__.py
-	cp libbf.so pkg/bf/libbf.so
+	cp __init__.py pkg/bfi/__init__.py
+	cp libbf.so pkg/bfi/libbf.so
 	../env/bin/python -m build pkg -o pkg -w
 
 install: build
 	@echo "\nInstall python package"
-	../env/bin/python -m pip install pkg/bf*.whl
+	../env/bin/python -m pip install pkg/bfi*.whl
