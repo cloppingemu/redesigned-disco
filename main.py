@@ -1,6 +1,5 @@
-import time
-import bf
+import bfi
 
 if __name__ == "__main__":
-    bfi = bf.BF()
-    bfi.interact()
+    interface = bfi.BF()
+    interface.interact()
