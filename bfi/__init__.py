@@ -81,7 +81,7 @@ help\tPrint this message
 buffer\tPrint buffer as decimal"""
         print(docstr, flush=True)
         while code != "q":
-            code = input("\n: ")
+            code = input("\n : ")
             if code[:5] == "input":
                 input_func = self.io_func_mapping.get(code[6:], None)
                 if input_func is None:
