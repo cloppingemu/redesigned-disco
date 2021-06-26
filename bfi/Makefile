@@ -47,6 +47,7 @@ env:
 
 build: env $(DYLIBNAME)
 	@echo "\nSetting up Python Wheel"
+	mkdir pkg/bfi
 	cp __init__.py pkg/bfi/__init__.py
 	cp libbf.so pkg/bfi/libbf.so
 	../env/bin/python -m build pkg -o pkg -w
